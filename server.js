@@ -27,13 +27,14 @@ app.get('/weather', (request, response, next) => {
   try {
     console.log('did we get req!!',request.query.query);
     let searchQuery = request.query.query;
+    console.log('what t h',searchQuery);
+    // let weatherDataToInstant = data.find(ele => console.log('mmmmmmm', ele.city_name));
 
-
-    let weatherDataToInstant = data.find(weatherElement => weatherElement.city_name === searchQuery);
+    let weatherDataToInstant = data.find(weatherElement => weatherElement.city_name.toLowerCase() === searchQuery.toLowerCase());
 
     console.log('!!!!!!!!!!datatatatat',weatherDataToInstant);
-
-
+    let weatherObject = new Weather(weatherDataToInstant);
+    console.log('zzzzzzzzzz',weatherObject);
 
     response.status(200).send('hi');
   } catch (error) {
@@ -54,6 +55,17 @@ app.get('*', (request, response) => {
 });
 
 
+
+
+
+//Classes
+class Weather{
+  constructor(weatherObject){
+    console.log('weatherOject in lon..!!!!!!!..', weatherObject.lon);
+    this.dateTime = weatherObject.data.dateTime;
+
+  }
+}
 
 
 
