@@ -4,7 +4,7 @@ console.log('!!!!server.js connected.');
 const express = require('express');
 
 require('dotenv').config();
-// let data = require('./data/pizza.json');
+let data = require('./data/pizza.json');
 
 const cors = require('cors');
 
@@ -29,6 +29,13 @@ app.get('/', (request, response) => {
 
 
 
+
+
+
+
+app.get('*', (request, response) => {
+  response.send('The route was not found. Error 404');
+});
 
 
 
