@@ -1,11 +1,10 @@
 'use strict';
 
-// import axios from 'axios';
 console.log('!!!!dummmmmbyserver.js connected.');
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-// let weather = require('./weather.js');
+// let weather = require('./modules/weather.js');
 const app = express();
 const PORT = process.env.PORT || 3002;
 
@@ -14,25 +13,24 @@ app.get('/', (request, response) => {
   response.send('hello,hello,hellocananybodyhearme!!!!');
 });
 
-// app.get('/weather', weatherHandler);
-// app.get('/weather', (request, response, next) => {
-//   try {
-//     console.log('did we get req!!', request.query.query);
-//     let searchQuery = request.query.query;
-//     console.log('what t h', searchQuery);
+
+app.get('/weather', weatherHandler);
 
 
-//     function weatherHandler(request, response) {
-//       const { lat, lon } = request.query;
-//       weather(lat, lon)
-//         .then(summaries => response.send(summaries))
-//         .catch((error) => {
-//           console.error(error);
-//           response.status(200).send('Sorry. Something went wrong!');
-//         });
-//     }
 
-//   }});
+function weatherHandler(request, response) {
+  console.log(request.query);
+  // const { lat, lon } = request.query;
+  // weather(lat, lon)
+  //   .then(summaries => response.send(summaries))
+  //   .catch((error) => {
+  //     console.error(error);
+  //     response.status(200).send('Sorry. Something went wrong!');
+  //   });
+  response.status(200).send('not yet!');
+}
+
+
 
 
 app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
