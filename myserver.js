@@ -19,7 +19,6 @@ app.get('*', (request, response) => {
 
 
 
-
 app.get('/weather', async (request, response, next) => {
   try {
     //console.log('did we get req!!',request.query.query);
