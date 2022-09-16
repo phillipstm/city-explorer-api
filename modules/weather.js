@@ -1,14 +1,19 @@
 'use strict';
 
-
+const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
 let cache = require('./cache.js');
 require('dotenv').config();
 
-module.exports = getWeather;
+const app = express();
+app.use(cors());
 
-function getWeather(latitude, longitude) {
-  const key = 'weather-' + latitude + longitude;
-  const url = `http://api.weatherbit.io/v2.0/forecast/daily/?key=${WEATHER_API_KEY}&lang=en&lat=${lat}&lon=${lon}&days=5`;
+
+
+function getWeather(lat, lon) {
+  const key = 'weather-' + lat + lon;
+  const url = `http://api.weatherbit.io/v2.0/forecast/daily/?key=${process.env.WEATHER_API_KEY}&lang=en&lat=${lat}&lon=${lon}&days=5`;
 
   if (cache[key] && (Date.now() - cache[key].timestamp < 50000)) {
     console.log('Cache hit');
@@ -36,7 +41,14 @@ function parseWeather(weatherData) {
 
 class Weather {
   constructor(day) {
+    console.log('', day)
     this.forecast = day.weather.description;
     this.time = day.datetime;
+    this.temp = day.tempature;
   }
 }
+
+
+
+
+module.exports = getWeather;
